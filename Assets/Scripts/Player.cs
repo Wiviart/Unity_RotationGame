@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float moveSpeed = 600f;
     float movement = 0f;
 
-    // Update is called once per frame
     void Update()
     {
         movement = Input.GetAxisRaw("Horizontal");
@@ -20,6 +18,15 @@ public class Player : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
+        StartCoroutine(DelayTime(2f));
+    }
+
+    IEnumerator DelayTime(float time)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(time);
+
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

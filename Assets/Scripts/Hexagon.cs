@@ -10,13 +10,18 @@ public class Hexagon : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.rotation = Random.Range(0f,360f);
-        transform.localScale = Vector3.one*10f;
+        rb.rotation = Random.Range(0f, 360f);
+        transform.localScale = Vector3.one * 10f;
     }
 
     void Update()
     {
         transform.localScale -= Vector3.one * shrinkSpeed * Time.deltaTime;
-        if (transform.localScale.x <= 0.5f) Destroy(gameObject);
+        
+        if (transform.localScale.x <= 0.5f)
+        {
+            Destroy(gameObject);
+            Score.instance.ScoreIncrease(1);
+        }
     }
 }
